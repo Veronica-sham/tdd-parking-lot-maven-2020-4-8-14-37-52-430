@@ -5,9 +5,20 @@ import org.junit.Test;
 
 public class ParkingLotTest {
     @Test
-    public void should_return_ticket_when_parking_boy_park_car(){
+    public void should_return_ticket_when_parking_boy_park_car() {
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingTicket parkingTicket = parkingBoy.parkCar(new Car());
         Assert.assertNotNull(parkingTicket);
+    }
+
+    @Test
+    public void should_fetch_car_when_parking_ticket_return_to_parking_boy() {
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car = new Car();
+        ParkingTicket parkingTicket = parkingBoy.parkCar(car);
+        ParkingTicket fetchedCar = parkingBoy.fetchCar(parkingTicket);
+
+        Assert.assertEquals(car, fetchedCar);
+
     }
 }
