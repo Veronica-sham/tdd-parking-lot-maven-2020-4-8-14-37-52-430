@@ -1,11 +1,18 @@
 package com.oocl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ParkingBoy {
+    private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<ParkingTicket, Car>();
+
     public ParkingTicket parkCar(Car car){
-        return new ParkingTicket();
+        ParkingTicket parkingTicket = new ParkingTicket();
+        this.parkingTicketCarMap.put(parkingTicket, car);
+        return parkingTicket;
     }
 
-    public ParkingTicket fetchCar(ParkingTicket parkingTicket) {
-        return null;
+    public Car fetchCar(ParkingTicket parkingTicket) {
+        return this.parkingTicketCarMap.get(parkingTicket);
     }
 }
