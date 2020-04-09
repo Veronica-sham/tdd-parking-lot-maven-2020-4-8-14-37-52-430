@@ -21,6 +21,9 @@ public class ParkingBoy {
         if(parkingTicketCarMap.containsValue(car)){
             return null;
         }
+        if(car == null){
+            return null;
+        }
         ParkingTicket parkingTicket = new ParkingTicket();
         this.parkingTicketCarMap.put(parkingTicket, car);
         return parkingTicket;
