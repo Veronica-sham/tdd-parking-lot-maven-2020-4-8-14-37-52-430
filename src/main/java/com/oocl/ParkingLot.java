@@ -16,7 +16,7 @@ public class ParkingLot {
     }
     public ParkingTicket parkCar(Car car){
         if(this.capacityOfParkingLot==parkingTicketCarMap.size()){
-            return null;
+            throw new FullParkingLotException();
         }
         if(parkingTicketCarMap.containsValue(car)){
             return null;

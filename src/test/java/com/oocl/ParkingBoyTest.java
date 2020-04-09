@@ -54,6 +54,18 @@ public class ParkingBoyTest {
         parkingBoy.fetchCar(null);
     }
 
+    @Test
+    public void should_return_exception_message_if_park_car_to_a_fulled_parking_lot(){
+        expectedException.expect(FullParkingLotException.class);
+        expectedException.expectMessage("Not enough position.");
+
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        parkingBoy.parkCar(new Car());
+        parkingBoy.parkCar(car);
+    }
+
 
 
 }
