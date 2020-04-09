@@ -1,36 +1,23 @@
 package com.oocl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ParkingBoy {
-    private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<ParkingTicket, Car>();
-    private int capacityOfParkingLot;
+    private List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+    private ParkingLot parkingLot;
 
-    public ParkingBoy(int capcityOfParkingLot){
-        this.capacityOfParkingLot = capcityOfParkingLot;
+    public ParkingBoy(ParkingLot... parkingLot){
+        this.parkingLots.addAll(Arrays.asList(parkingLot));
     }
 
-    public ParkingBoy(){
-        this.capacityOfParkingLot =10;
-    }
-    public ParkingTicket parkCar(Car car){
-        if(this.capacityOfParkingLot==parkingTicketCarMap.size()){
-            return null;
-        }
-        if(parkingTicketCarMap.containsValue(car)){
-            return null;
-        }
-        if(car == null){
-            return null;
-        }
-        ParkingTicket parkingTicket = new ParkingTicket();
-        this.parkingTicketCarMap.put(parkingTicket, car);
-        return parkingTicket;
+    public ParkingTicket parkCar(Car car) {
+        return this.parkingLots.get(0).parkCar(car);
     }
 
     public Car fetchCar(ParkingTicket parkingTicket) {
-        Car car = this.parkingTicketCarMap.remove(parkingTicket);
-        return car;
+
+        return this.parkingLots.get(0).fetchCar(parkingTicket);
     }
 }
