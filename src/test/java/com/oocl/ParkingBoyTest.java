@@ -42,6 +42,18 @@ public class ParkingBoyTest {
         parkingBoy.fetchCar(new ParkingTicket());
     }
 
+    @Test
+    public void should_return_exception_message_if_no_ticket_provided(){
+        expectedException.expect(MissingTicketException.class);
+        expectedException.expectMessage("Please provide your parking ticket.");
+
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        ParkingTicket parkingTicket = parkingBoy.parkCar(car);
+        parkingBoy.fetchCar(null);
+    }
+
 
 
 }

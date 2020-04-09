@@ -30,8 +30,11 @@ public class ParkingLot {
     }
 
     public Car fetchCar(ParkingTicket parkingTicket) {
-        if (!this.parkingTicketCarMap.containsKey(parkingTicket)){
+        if (!this.parkingTicketCarMap.containsKey(parkingTicket)&&parkingTicket!=null){
             throw new UnrecognizedParkingTicketException();
+        }
+        if (parkingTicket==null){
+            throw new MissingTicketException();
         }
         Car car = this.parkingTicketCarMap.remove(parkingTicket);
         return car;
