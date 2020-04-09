@@ -38,4 +38,13 @@ public class ParkingLotTest {
         Car car = parkingBoy.fetchCar(parkingTicket);
         Assert.assertNull(car);
     }
+
+    @Test
+    public void should_not_return_car_ticket_when_parking_lot_full() {
+        ParkingBoy parkingBoy = new ParkingBoy(1);
+        parkingBoy.parkCar(new Car());
+        ParkingTicket parkingTicket = parkingBoy.parkCar(new Car());
+
+        Assert.assertNull(parkingTicket);
+    }
 }
