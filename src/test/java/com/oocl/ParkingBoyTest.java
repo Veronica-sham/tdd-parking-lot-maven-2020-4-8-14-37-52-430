@@ -66,6 +66,18 @@ public class ParkingBoyTest {
         parkingBoy.parkCar(car);
     }
 
+    @Test
+    public void should_park_car_to_second_parking_lot_when_first_is_full(){
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
+        parkingBoy.parkCar(new Car());
+
+        Car car = new Car();
+        ParkingTicket parkingTicket = parkingBoy.parkCar(car);
+        Car fetchedCar = secondParkingLot.fetchCar(parkingTicket);
+        Assert.assertEquals(car, fetchedCar);
+    }
 
 
 }

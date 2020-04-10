@@ -6,6 +6,7 @@ import java.util.Map;
 public class ParkingLot {
     private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<ParkingTicket, Car>();
     private int capacityOfParkingLot;
+    private Boolean isFull = false;
 
     public ParkingLot(int capcityOfParkingLot){
         this.capacityOfParkingLot = capcityOfParkingLot;
@@ -37,8 +38,17 @@ public class ParkingLot {
             throw new MissingTicketException();
         }
         Car car = this.parkingTicketCarMap.remove(parkingTicket);
+        this.isFull = false;
         return car;
     }
+
+    public Boolean getIsFull(){
+        if(this.capacityOfParkingLot==parkingTicketCarMap.size()){
+            isFull = true;
+        }
+        return isFull;
+    }
+
 
 
 }
