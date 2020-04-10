@@ -8,22 +8,22 @@ public class ParkingLot {
     private int capacityOfParkingLot;
     private Boolean isFull = false;
 
-    public ParkingLot(int capcityOfParkingLot){
+    public ParkingLot(int capcityOfParkingLot) {
         this.capacityOfParkingLot = capcityOfParkingLot;
     }
 
-    public ParkingLot(){
-        this.capacityOfParkingLot =10;
+    public ParkingLot() {
+        this.capacityOfParkingLot = 10;
     }
 
-    public ParkingTicket parkCar(Car car){
-        if(this.capacityOfParkingLot==parkingTicketCarMap.size()){
+    public ParkingTicket parkCar(Car car) {
+        if (this.capacityOfParkingLot == parkingTicketCarMap.size()) {
             throw new FullParkingLotException();
         }
-        if(parkingTicketCarMap.containsValue(car)){
+        if (parkingTicketCarMap.containsValue(car)) {
             return null;
         }
-        if(car == null){
+        if (car == null) {
             return null;
         }
         ParkingTicket parkingTicket = new ParkingTicket();
@@ -32,19 +32,19 @@ public class ParkingLot {
     }
 
     public Car fetchCar(ParkingTicket parkingTicket) {
-        if (!this.parkingTicketCarMap.containsKey(parkingTicket)&&parkingTicket!=null){
+        if (!this.parkingTicketCarMap.containsKey(parkingTicket) && parkingTicket != null) {
             throw new UnrecognizedParkingTicketException();
         }
-        if (parkingTicket==null){
+        if (parkingTicket == null) {
             throw new MissingTicketException();
         }
         Car car = this.parkingTicketCarMap.remove(parkingTicket);
         return car;
     }
 
-    public Boolean getIsFull(){
-        if(this.capacityOfParkingLot==parkingTicketCarMap.size()){
-            isFull = true;
+    public Boolean getIsFull() {
+        if (this.capacityOfParkingLot == parkingTicketCarMap.size()) {
+            throw new FullParkingLotException();
         }
         return isFull;
     }
@@ -53,7 +53,7 @@ public class ParkingLot {
         return parkingTicketCarMap;
     }
 
-    public int getCapacityOfParkingLot(){
+    public int getCapacityOfParkingLot() {
         return capacityOfParkingLot;
     }
 }

@@ -8,12 +8,12 @@ public class ParkingBoy {
     private List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
     private ParkingLot parkingLot;
 
-    public ParkingBoy(ParkingLot... parkingLot){
+    public ParkingBoy(ParkingLot... parkingLot) {
         this.parkingLots.addAll(Arrays.asList(parkingLot));
     }
 
     public ParkingTicket parkCar(Car car) {
-        ParkingLot chooseParkingLot = this.parkingLots.stream().filter(parkingLots ->!parkingLots.getIsFull()).findFirst().get();
+        ParkingLot chooseParkingLot = this.parkingLots.stream().filter(parkingLots -> !parkingLots.getIsFull()).findFirst().get();
         return chooseParkingLot.parkCar(car);
     }
 
@@ -21,7 +21,7 @@ public class ParkingBoy {
         return this.parkingLots.get(0).fetchCar(parkingTicket);
     }
 
-    public int getCountParkingLog(){
+    public int getCountParkingLog() {
         return this.parkingLots.size();
     }
 
