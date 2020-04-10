@@ -22,19 +22,19 @@ public class ParkingServiceManager {
         return chooseParkingLot.parkCar(car);
     }
 
-    public ParkingServiceManager(ParkingBoy parkingBoy, Car car) {
+    public ParkingServiceManager(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
         this.parkingBoy = parkingBoy;
-        this.parkingTicket = parkingBoy.parkCar(car);
+        this.parkingTicket = parkingTicket;
     }
 
-    public ParkingServiceManager(SmartParkingBoy smartParkingBoy, Car car) {
+    public ParkingServiceManager(SmartParkingBoy smartParkingBoy, ParkingTicket parkingTicket) {
         this.smartParkingBoy = smartParkingBoy;
-        this.parkingTicket = smartParkingBoy.parkCar(car);
+        this.parkingTicket = parkingTicket;
     }
 
-    public ParkingServiceManager(SuperSmartParkingBoy superSmartParkingBoy, Car car) {
+    public ParkingServiceManager(SuperSmartParkingBoy superSmartParkingBoy, ParkingTicket parkingTicket) {
         this.superSmartParkingBoy = superSmartParkingBoy;
-        this.parkingTicket = superSmartParkingBoy.parkCar(car);
+        this.parkingTicket = parkingTicket;
     }
 
 
@@ -48,7 +48,8 @@ public class ParkingServiceManager {
             car = this.superSmartParkingBoy.fetchCar(this.parkingTicket);
         }
         if (this.parkingBoy!=(null)) {
-            car = this.parkingBoy.fetchCar(this.parkingTicket);}
+            car = this.parkingBoy.fetchCar(this.parkingTicket);
+        }
 
             return car;
         }
