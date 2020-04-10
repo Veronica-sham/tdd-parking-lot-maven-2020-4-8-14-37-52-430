@@ -49,6 +49,11 @@ public class ParkingLot {
         return isFull;
     }
 
+    public Map<ParkingTicket, Car> getParkingTicketCarMap() {
+        return parkingTicketCarMap;
+    }
 
-
+    public int getCapacityOfParkingLot(){
+        return capacityOfParkingLot;
+    }
 }
