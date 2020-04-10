@@ -6,7 +6,7 @@ import org.junit.Test;
 public class ServiceManagerTest {
 
     @Test
-    public void should_assign_a_specific_type_of_parking_boy_to_park_or_fetch_car(){
+    public void should_assign_a_smart_parking_boy_to_park_or_fetch_car(){
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
         ParkingLot thirdParkingLot = new ParkingLot();
