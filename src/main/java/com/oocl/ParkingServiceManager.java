@@ -3,9 +3,13 @@ package com.oocl;
 public class ParkingServiceManager {
 
     private ParkingTicket parkingTicket;
-    private SmartParkingBoy smartParkingBoy;
+    private SmartParkingBoy smartParkingBoy = null;
+    private SuperSmartParkingBoy superSmartParkingBoy = null;
+    private ParkingBoy parkingBoy = null;
 
-    public ParkingServiceManager(ParkingBoy parkingBoy) {
+    public ParkingServiceManager(ParkingBoy parkingBoy, Car car) {
+        this.parkingBoy = parkingBoy;
+        this.parkingTicket = parkingBoy.parkCar(car);
     }
 
     public ParkingServiceManager(SmartParkingBoy smartParkingBoy, Car car) {
@@ -13,16 +17,25 @@ public class ParkingServiceManager {
         this.parkingTicket = smartParkingBoy.parkCar(car);
     }
 
-    public ParkingServiceManager(SuperSmartParkingBoy superSmartParkingBoy) {
+    public ParkingServiceManager(SuperSmartParkingBoy superSmartParkingBoy, Car car) {
+        this.superSmartParkingBoy = superSmartParkingBoy;
+        this.parkingTicket = superSmartParkingBoy.parkCar(car);
     }
 
 
     public Car fetchCar() {
         Car car = null;
-        if(!this.smartParkingBoy.equals(null)){
-            car =  this.smartParkingBoy.fetchCar(this.parkingTicket);
-        }
 
-        return car;
+        if (this.smartParkingBoy!=null) {
+            car = this.smartParkingBoy.fetchCar(this.parkingTicket);
+        }
+        if (this.superSmartParkingBoy!=(null)) {
+            car = this.superSmartParkingBoy.fetchCar(this.parkingTicket);
+        }
+        if (this.parkingBoy!=(null)) {
+            car = this.parkingBoy.fetchCar(this.parkingTicket);}
+
+            return car;
+        }
     }
-}
+

@@ -15,6 +15,7 @@ public class ParkingLot {
     public ParkingLot(){
         this.capacityOfParkingLot =10;
     }
+
     public ParkingTicket parkCar(Car car){
         if(this.capacityOfParkingLot==parkingTicketCarMap.size()){
             throw new FullParkingLotException();
@@ -38,7 +39,6 @@ public class ParkingLot {
             throw new MissingTicketException();
         }
         Car car = this.parkingTicketCarMap.remove(parkingTicket);
-        this.isFull = false;
         return car;
     }
 
