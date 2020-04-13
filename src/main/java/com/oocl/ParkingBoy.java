@@ -25,4 +25,7 @@ public class ParkingBoy {
         return this.parkingLots.size();
     }
 
+    public List<ParkingLot> getParkingLots() {
+        return this.parkingLots;
+    }
 }

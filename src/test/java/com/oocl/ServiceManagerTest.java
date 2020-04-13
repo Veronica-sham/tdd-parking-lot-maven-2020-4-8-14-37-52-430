@@ -16,50 +16,47 @@ public class ServiceManagerTest {
     @Test
     public void should_assign_a_smart_parking_boy_to_park_or_fetch_car() {
         ParkingLot secondParkingLot = new ParkingLot();
-
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(secondParkingLot);
+        ParkingServiceManager manager = new ParkingServiceManager();
+        manager.addParkingBoys(smartParkingBoy);
         Car car = new Car();
-        ParkingTicket parkingTicket = smartParkingBoy.parkCar(car);
-        ParkingServiceManager serviceManager = new ParkingServiceManager();
-        serviceManager.parkCar(smartParkingBoy, parkingTicket);
-        Car fetchedCar = serviceManager.fetchCar();
+        ParkingTicket parkingTicket = manager.parkCarByAnyParkingBoy(car);
+        Car fetchedCar = manager.fetchCarByAnyParkingBoy(parkingTicket);
         Assert.assertEquals(car, fetchedCar);
     }
 
     @Test
     public void should_assign_a_super_smart_parking_boy_to_park_or_fetch_car() {
         ParkingLot thirdParkingLot = new ParkingLot();
-
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(thirdParkingLot);
+        ParkingServiceManager manager = new ParkingServiceManager();
+        manager.addParkingBoys(superSmartParkingBoy);
         Car car = new Car();
-        ParkingTicket parkingTicket = superSmartParkingBoy.parkCar(car);
-        ParkingServiceManager serviceManager = new ParkingServiceManager();
-        serviceManager.parkCar(superSmartParkingBoy, parkingTicket);
-        Car fetchedCar = serviceManager.fetchCar();
+        ParkingTicket parkingTicket = manager.parkCarByAnyParkingBoy(car);
+        Car fetchedCar = manager.fetchCarByAnyParkingBoy(parkingTicket);
         Assert.assertEquals(car, fetchedCar);
     }
 
     @Test
     public void should_assign_a_normal_parking_boy_to_park_or_fetch_car() {
         ParkingLot firstParkingLot = new ParkingLot();
-
         ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot);
+        ParkingServiceManager manager = new ParkingServiceManager();
+        manager.addParkingBoys(parkingBoy);
         Car car = new Car();
-        ParkingTicket parkingTicket = parkingBoy.parkCar(car);
-        ParkingServiceManager serviceManager = new ParkingServiceManager();
-        serviceManager.parkCar(parkingBoy, parkingTicket);
-        Car fetchedCar = serviceManager.fetchCar();
+        ParkingTicket parkingTicket = manager.parkCarByAnyParkingBoy(car);
+        Car fetchedCar = manager.fetchCarByAnyParkingBoy(parkingTicket);
         Assert.assertEquals(car, fetchedCar);
     }
 
     @Test
     public void should_return_car_when_service_manager_park_or_fetch_car() {
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingServiceManager serviceManager = new ParkingServiceManager(parkingLot);
+        ParkingLot firstParkingLot = new ParkingLot();
+        ParkingServiceManager manager = new ParkingServiceManager(firstParkingLot);
         Car car = new Car();
-        ParkingTicket parkingTicket = serviceManager.parkCar(car);
-        Car fetchedCarFromParkingLot = serviceManager.fetchCar(parkingTicket);
-        Assert.assertEquals(car, fetchedCarFromParkingLot);
+        ParkingTicket parkingTicket = manager.parkCar(car);
+        Car fetchedCar = manager.fetchCar(parkingTicket);
+        Assert.assertEquals(car, fetchedCar);
     }
 
     @Test
@@ -71,8 +68,9 @@ public class ServiceManagerTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
         ParkingServiceManager serviceManager = new ParkingServiceManager();
-        serviceManager.parkCar(parkingBoy, (ParkingTicket) null);
-        serviceManager.fetchCar();
+        serviceManager.addParkingBoys(parkingBoy);
+        serviceManager.parkCarByAnyParkingBoy(car);
+        serviceManager.fetchCarByAnyParkingBoy(null);
     }
 
     @Test
@@ -84,9 +82,9 @@ public class ServiceManagerTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
         ParkingServiceManager serviceManager = new ParkingServiceManager();
-        serviceManager.parkCar(parkingBoy, car);
-        // serviceManager.parkCar(parkingBoy,new Car());
-        parkingBoy.parkCar(new Car());
+        serviceManager.addParkingBoys(parkingBoy);
+        serviceManager.parkCarByAnyParkingBoy(car);
+        serviceManager.parkCarByAnyParkingBoy(new Car());
 
     }
 
@@ -99,7 +97,30 @@ public class ServiceManagerTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
         ParkingServiceManager serviceManager = new ParkingServiceManager();
-        serviceManager.parkCar(parkingBoy, car);
-        serviceManager.fetchCar(parkingBoy, new ParkingTicket());
+        serviceManager.addParkingBoys(parkingBoy);
+        serviceManager.parkCarByAnyParkingBoy(car);
+        serviceManager.fetchCarByAnyParkingBoy(new ParkingTicket());
+    }
+
+    @Test
+    public void should_not_return_ticket_when_no_car_is_parked() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingServiceManager serviceManager = new ParkingServiceManager();
+        serviceManager.addParkingBoys(parkingBoy);
+        ParkingTicket parkingTicket = serviceManager.parkCarByAnyParkingBoy(null);
+        Assert.assertEquals(null,parkingTicket);
+    }
+
+    @Test
+    public void should_not_return_ticket_when_the_car_has_been_parked_already() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        ParkingServiceManager serviceManager = new ParkingServiceManager();
+        serviceManager.addParkingBoys(parkingBoy);
+        serviceManager.parkCarByAnyParkingBoy(car);
+        ParkingTicket parkingTicket1 = serviceManager.parkCarByAnyParkingBoy(car);
+        Assert.assertEquals(null,parkingTicket1);
     }
 }
