@@ -24,8 +24,5 @@ public class SuperSmartParkingBoy extends ParkingBoy {
         return chooseParkingLot.parkCar(car);
     }
 
-    public Car fetchCar(ParkingTicket parkingTicket) {
-        return super.getParkingLots().get(0).fetchCar(parkingTicket);
-    }
 
 }

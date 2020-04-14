@@ -6,7 +6,6 @@ import java.util.List;
 
 public class ParkingBoy {
     private List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
-    private ParkingLot parkingLot;
 
     public ParkingBoy(ParkingLot... parkingLot) {
         this.parkingLots.addAll(Arrays.asList(parkingLot));
@@ -19,10 +18,6 @@ public class ParkingBoy {
 
     public Car fetchCar(ParkingTicket parkingTicket) {
         return this.parkingLots.get(0).fetchCar(parkingTicket);
-    }
-
-    public int getCountParkingLog() {
-        return this.parkingLots.size();
     }
 
     public List<ParkingLot> getParkingLots() {
