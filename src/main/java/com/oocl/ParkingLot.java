@@ -58,10 +58,13 @@ public class ParkingLot {
     }
 
     public int getSpaceLeftInParkingLot() {
-        return getCapacityOfParkingLot() - getParkingTicketCarMap().size();
+        int numberOfCarsInParkingLotNow = getParkingTicketCarMap().size();
+        int parkingSpaceLeft = this.capacityOfParkingLot - numberOfCarsInParkingLotNow;
+        return parkingSpaceLeft;
     }
 
     public float getAvailablePositionRate() {
-        return (float) ((getCapacityOfParkingLot() - getParkingTicketCarMap().size())/ getCapacityOfParkingLot());
+        int parkingSpaceLeft = getSpaceLeftInParkingLot();
+        return (float) (parkingSpaceLeft/ getCapacityOfParkingLot());
     }
 }
