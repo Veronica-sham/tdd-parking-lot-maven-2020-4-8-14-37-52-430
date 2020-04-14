@@ -13,7 +13,7 @@ public class ParkingBoy {
     }
 
     public ParkingTicket parkCar(Car car) {
-        ParkingLot chooseParkingLot = this.parkingLots.stream().filter(parkingLots -> !parkingLots.getIsFull()).findFirst().get();
+        ParkingLot chooseParkingLot = this.parkingLots.stream().filter(parkingLots -> !parkingLots.getIsFull()).findFirst().orElseThrow(FullParkingLotException::new);
         return chooseParkingLot.parkCar(car);
     }
 
@@ -27,5 +27,9 @@ public class ParkingBoy {
 
     public List<ParkingLot> getParkingLots() {
         return this.parkingLots;
+    }
+
+    public boolean containCar(Car car) {
+        return getParkingLots().stream().anyMatch(parkingLot -> parkingLot.getParkingTicketCarMap().containsValue(car));
     }
 }

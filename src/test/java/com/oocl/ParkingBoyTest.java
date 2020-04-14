@@ -69,7 +69,7 @@ public class ParkingBoyTest {
     @Test
     public void should_park_car_to_second_parking_lot_when_first_is_full(){
         ParkingLot firstParkingLot = new ParkingLot(1);
-        ParkingLot secondParkingLot = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot(3);
         ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
         parkingBoy.parkCar(new Car());
 

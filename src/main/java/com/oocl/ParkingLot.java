@@ -44,7 +44,7 @@ public class ParkingLot {
 
     public Boolean getIsFull() {
         if (this.capacityOfParkingLot == parkingTicketCarMap.size()) {
-            throw new FullParkingLotException();
+            isFull = true;
         }
         return isFull;
     }
@@ -55,5 +55,13 @@ public class ParkingLot {
 
     public int getCapacityOfParkingLot() {
         return capacityOfParkingLot;
+    }
+
+    public int getSpaceLeftInParkingLot() {
+        return getCapacityOfParkingLot() - getParkingTicketCarMap().size();
+    }
+
+    public float getAvailablePositionRate() {
+        return (float) ((getCapacityOfParkingLot() - getParkingTicketCarMap().size())/ getCapacityOfParkingLot());
     }
 }

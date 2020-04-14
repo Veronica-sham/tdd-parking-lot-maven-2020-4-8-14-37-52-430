@@ -20,7 +20,7 @@ public class ParkingServiceManager extends ParkingBoy {
         if (car == null) {
             return null;
         }
-        if (parkingBoys.stream().anyMatch(parkingBoy -> parkingBoy.getParkingLots().stream().anyMatch(parkingLot -> parkingLot.getParkingTicketCarMap().containsValue(car)))) {
+        if (parkingBoys.stream().anyMatch(parkingBoy -> parkingBoy.containCar(car))) {
             return null;
         }
 
